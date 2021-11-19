@@ -1,0 +1,15 @@
+{
+  "name": "vidly",
+  "version": "1.0.0",
+  "description": "Application for video rental",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "joi": "^17.4.2"
+  }
+}
