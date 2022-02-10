@@ -8,7 +8,7 @@ const Joi = require("joi");
 // ];
 
 // create mongoose Schema via model
-const genreSchema = mongoose.Schema({
+const genreSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
