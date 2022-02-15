@@ -30,6 +30,7 @@ router.post('/', async (req, res) => {
     customer: {
       customerId: customer._id,
       name: customer.name,
+      isGold: customer.isGold,
       phone: customer.phone,
     },
     movie: {
@@ -40,12 +41,14 @@ router.post('/', async (req, res) => {
   })
 
   session.startTransaction();
+  console.log('Session started');
 try {
   rental = await rental.save();
   movie.numberInStock--;
-  movie.save();
+  await movie.save();
   await session.commitTransaction();
   session.endSession();
+  console.log(`Session ended`);
   res.send(rental)
 } catch (error) {
   await session.abortTransaction();
