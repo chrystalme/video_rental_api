@@ -3,6 +3,7 @@ const {Movie} = require('../models/movie');
 const {Customer} = require('../models/customer');
 const mongoose = require('mongoose');
 const express = require('express');
+const auth = require('../middleware/auth');
 const router = express.Router();
 
 // READ
@@ -13,7 +14,7 @@ router.get('/', async (req, res) => {
 });
 
 // CREATE
-router.post('/', async (req, res) => {
+router.post('/',auth, async (req, res) => {
   const { customerId, movieId } = req.body;
   const session = await mongoose.startSession();
   const { error } = validate(req.body);

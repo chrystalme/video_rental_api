@@ -1,4 +1,5 @@
 const express = require('express');
+const auth = require('../middleware/auth');
 const { Genre } = require('../models/genre');
 const router = express.Router();
 const {Movie, validate} = require('../models/movie')
@@ -17,7 +18,7 @@ router.get('/:id', async (req, res) => {
 })
 
 // CREATE
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).json({'message' : error.details[0].message});
   
@@ -39,7 +40,7 @@ router.post("/", async (req, res) => {
 });
 
 // UPDATE
-router.put("/:id", async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 

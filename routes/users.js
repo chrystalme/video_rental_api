@@ -2,6 +2,8 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 const {User, validate} = require('../models/user');
+const auth = require('../middleware/auth');
+const jwt = require('jsonwebtoken');
 
 
 // READ
@@ -10,11 +12,12 @@ router.get("/", async (req, res) => {
   res.send(user);
 });
 
-// SHOW
-router.get('/:id', async (req, res) => {
-  const user = await User.findById(req.params.id);
+// SHOW(Use me rather than :/id to keep the intruders from using an id to check other users details)
+router.get('/me', auth , async (req, res) => {
+  // const id = jwt.decode(req.header('x-auth-token'));
+  const user = await User.findById(req.user._id).select('-password');
   if (!user) return res.status(404).send('user not found.')
-
+  // console.log(id);
   res.send(user);
 });
 
