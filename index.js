@@ -30,6 +30,9 @@ app.use("/api/movies", movies);
 app.use("/api/rentals", rentals);
 app.use("/api/users", users);
 app.use("/api/auth", auth);
+app.use(function(err, req, res, next) {
+  res.status(400).send("Something went wrong.")
+})
 
 const port = process.env.POST || 3000;
 app.listen(port, () => console.log(`listening on port ${port}...`));
