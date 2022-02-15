@@ -1,7 +1,7 @@
 # video_rental_api
 A NodeJS api for a video rental service
 
-#Dependencies
+## Dependencies
   - Node
   - MongoDB
   - nodemon
